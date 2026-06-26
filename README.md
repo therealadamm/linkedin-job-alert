@@ -30,7 +30,7 @@ and toggle "Email me about new jobs" — costs nothing and can't break.
 3. **Add your secrets** — go to your repo's `Settings → Secrets and variables →
    Actions → New repository secret` and add two:
    - `TELEGRAM_BOT_TOKEN` → the bot token you already have
-   - `TELEGRAM_CHAT_ID` → `1204609399`
+   - `TELEGRAM_CHAT_ID` → `12345678`
 
    Don't put these values directly in the code — secrets keep them out of your
    commit history.
