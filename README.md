@@ -45,7 +45,7 @@ and toggle "Email me about new jobs" — costs nothing and can't break.
 
    To check Telegram delivery on its own (skip LinkedIn entirely), run locally:
    ```bash
-   TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=1204609399 python3 linkedin_job_alert.py --test
+   TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=123456789 python3 linkedin_job_alert.py --test
    ```
 
 6. Once a manual test message arrives, you're done — it'll now run automatically on
