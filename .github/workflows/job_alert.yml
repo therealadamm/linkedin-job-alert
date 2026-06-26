@@ -1,0 +1,43 @@
+name: LinkedIn Job Alert
+
+on:
+  schedule:
+    # Every 2 hours, 8am-10pm Malaysia time (UTC+8) -> 00:00-14:00 UTC
+    - cron: "0 0,2,4,6,8,10,12,14 * * *"
+  workflow_dispatch: {}  # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write  # needed so the workflow can commit the updated seen_jobs.json
+
+concurrency:
+  group: linkedin-job-alert
+  cancel-in-progress: false
+
+jobs:
+  check-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run job check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python linkedin_job_alert.py
+
+      - name: Persist seen jobs
+        run: |
+          git config user.name "linkedin-job-alert-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add seen_jobs.json
+          git diff --staged --quiet || git commit -m "Update seen jobs [skip ci]"
+          git push
