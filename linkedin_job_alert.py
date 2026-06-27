@@ -26,12 +26,12 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 SEEN_FILE = "seen_jobs.json"
 
 # Treated as OR: a job is interesting if it matches ANY of these keywords
-KEYWORDS = ["Fresh Graduate", "Network Engineer"]
+KEYWORDS = ["Fresh Graduate", "Network Engineer", "Programme", "Trainee" ]
 
 # LinkedIn's "distance" filter only accepts fixed steps (5/10/25/50/75/100 miles).
 # 25 miles (~40km) is the closest standard option to your ~50km ask, centered on KL,
 # which covers most of the Klang Valley (PJ, Shah Alam, Subang, Klang, Cyberjaya, Putrajaya, etc).
-LOCATION = "Kuala Lumpur, Malaysia"
+LOCATIONS = ["Kuala Lumpur, Malaysia", "Selangor, Malaysia"]
 DISTANCE_MILES = 25
 
 # Look-back window per run. Wider than the run interval so we never miss a
