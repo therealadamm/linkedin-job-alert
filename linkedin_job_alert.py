@@ -40,6 +40,7 @@ DISTANCE_MILES = 25
 TIME_WINDOW_SECONDS = 3 * 60 * 60  # 3 hours
 
 RESULTS_PER_KEYWORD = 25
+EXCLUDE_TITLE_KEYWORDS = ["senior", "manager", "lead", "principal", "head of", "5+ years"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -118,6 +119,11 @@ def fetch_jobs(keyword):
 
 def is_relevant(job):
     loc = job["location"].lower()
+    title = job["title"].lower()
+    
+    if any(kw in title for kw in EXCLUDE_TITLE_KEYWORDS):
+        return False
+
 
     # You want physical roles, not remote
     if "remote" in loc:
