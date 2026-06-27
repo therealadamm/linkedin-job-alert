@@ -26,7 +26,7 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 SEEN_FILE = "seen_jobs.json"
 
 # Treated as OR: a job is interesting if it matches ANY of these keywords
-KEYWORDS = ["Fresh Graduate", "Network Engineer"]
+KEYWORDS = ["Fresh Graduate", "Network Engineer", "Trainee", "Programme"]
 
 # LinkedIn's "distance" filter only accepts fixed steps (5/10/25/50/75/100 miles).
 # 25 miles (~40km) is the closest standard option to your ~50km ask, centered on KL,
