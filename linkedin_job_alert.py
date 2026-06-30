@@ -40,7 +40,7 @@ DISTANCE_MILES = 25
 TIME_WINDOW_SECONDS = 3 * 60 * 60  # 3 hours
 
 RESULTS_PER_KEYWORD = 25
-EXCLUDE_TITLE_KEYWORDS = ["senior", "manager", "lead", "principal", "head of", "5+ years", "internship", "intern"]
+EXCLUDE_TITLE_KEYWORDS = ["senior", "manager", "lead", "principal", "head of", "5+ years", "internship", "intern", "software"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
