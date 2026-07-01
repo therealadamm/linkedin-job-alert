@@ -37,6 +37,8 @@ RESULTS_PER_KEYWORD = 25
 EXCLUDE_TITLE_KEYWORDS = [
     "senior", "manager", "lead", "principal", "head of",
     "5+ years", "internship", "intern", "software",
+    "food","credit","mechanical","electrical","quantity",
+    "marketing"
 ]
 
 # Jobs from these companies get a ⭐ priority flag in the Telegram message.
