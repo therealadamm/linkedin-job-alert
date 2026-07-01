@@ -39,6 +39,25 @@ EXCLUDE_TITLE_KEYWORDS = [
     "5+ years", "internship", "intern", "software",
 ]
 
+# Jobs from these companies get a ⭐ priority flag in the Telegram message.
+# Add any new company here — no code change needed anywhere else.
+TARGET_COMPANIES = [
+    "bank negara malaysia", "bnm",
+    "slb", "schlumberger",
+    "bank islam",
+    "ambank", "ambank group",
+    "public bank",
+    "cimb", "cimb group",
+    "rhb", "rhb bank",
+    "huawei",
+    "accenture",
+    "paynet",
+    "khazanah",
+    "maxis",
+    "pnb", "permodalan nasional berhad",
+    "maybank", "malayan banking",
+]
+
 # JobStreet salary filter:
 #   - salary shown AND below this -> skip
 #   - no salary shown             -> post (you decide)
@@ -294,11 +313,17 @@ def send_telegram(job):
     source = job.get("source", "LinkedIn")
     icon = "\U0001F535" if source == "LinkedIn" else "\U0001F7E1"  # 🔵 🟡
 
+    # Priority flag if company matches your target list
+    company_lower = job.get("company", "").lower()
+    is_priority = any(tc in company_lower for tc in TARGET_COMPANIES)
+    priority_tag = "\u2B50 <b>PRIORITY COMPANY</b>\n" if is_priority else ""
+
     salary_line = ""
     if job.get("salary_text"):
         salary_line = f"\U0001F4B0 {html.escape(job['salary_text'])}\n"
 
     text = (
+        f"{priority_tag}{icon} <b>[{source}]</b>  \U0001F195 <b>{html.escape(job['title'])}</b>\n"
         f"{icon} <b>[{source}]</b>  \U0001F195 <b>{html.escape(job['title'])}</b>\n"
         f"\U0001F3E2 {html.escape(job['company'])}\n"
         f"\U0001F4CD {html.escape(job['location'])}\n"
