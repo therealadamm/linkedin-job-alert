@@ -58,6 +58,9 @@ TARGET_COMPANIES = [
     "maxis",
     "pnb", "permodalan nasional berhad",
     "maybank", "malayan banking",
+    "tng digital" , "tng",
+    "ryt bank" , "gxbank",
+    "mbsb", "mbsb bank berhad"
 ]
 
 # JobStreet salary filter:
