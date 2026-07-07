@@ -21,7 +21,7 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 SEEN_FILE = "seen_jobs.json"
 
-KEYWORDS = ["Fresh Graduate", "Network Engineer", "Trainee", "Programme", "Associate"]
+KEYWORDS = ["Fresh Graduate", "Network Engineer", "Trainee", "Programme", "Associate", "Security", "Penetration Tester"]
 
 # LinkedIn uses a single centre-point + radius.
 # JobStreet searches KL and Selangor separately and merges results.
