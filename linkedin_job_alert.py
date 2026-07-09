@@ -21,8 +21,49 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 SEEN_FILE = "seen_jobs.json"
 
-KEYWORDS = ["Fresh Graduate", "Network Engineer", "Trainee", "Programme", "Associate", "Security", "Penetration Tester"]
+KEYWORDS = [
+    # Core network titles
+    "Network Engineer",
+    "Network Administrator",
+    "Network Support Engineer",
+    "Network Operations",
+    "NOC Engineer",
 
+    # Alternative names for the same role
+    "Datacomm Engineer",
+    "Data Communication",
+    "Infrastructure Engineer",
+    "IT Infrastructure",
+    "Network Infrastructure",
+    "Systems Engineer",
+    "Platform Engineer",
+    "Field Engineer",
+    "Transmission Engineer",
+    "IP Engineer",
+    "Pre-Sales Engineer",         # common at Huawei, Cisco partners
+    "ICT Engineer",
+    "ICT Officer",
+
+    # Data center adjacent
+    "Data Center Engineer",
+    "DC Operations",
+
+    # Security (your existing ones, kept)
+    "Cybersecurity",
+    "Cyber Security",
+    "SOC Analyst",
+    "Security Analyst",
+    "Information Security",
+    "Network Security",
+    "IT Security",
+
+    # Fresh grad entry points
+    "Fresh Graduate",
+    "Graduate Trainee",
+    "Graduate Programme",
+    "Management Trainee",
+    "Associate Engineer",
+]
 # LinkedIn uses a single centre-point + radius.
 # JobStreet searches KL and Selangor separately and merges results.
 LINKEDIN_LOCATION = "Kuala Lumpur, Malaysia"
@@ -35,33 +76,111 @@ RESULTS_PER_KEYWORD = 25
 
 # Titles containing any of these are silently skipped (case-insensitive)
 EXCLUDE_TITLE_KEYWORDS = [
-    "senior", "manager", "lead", "principal", "head of",
-    "5+ years", "internship", "intern", "software",
-    "food","credit","mechanical","electrical","quantity",
-    "marketing", "sales", "crew", "japanese", "mandarin", 
-    "korean", "hr", "bd", 
+    # Seniority — you're not ready for these
+    "senior", "sr.", "lead", "principal", "head of", "director",
+    "manager", "supervisor", "vp", "vice president",
+    "5+ years", "7+ years", "10+ years",
+
+    # Wrong domains entirely
+    "software", "frontend", "backend", "fullstack", "full stack",
+    "mobile", "android", "ios", "flutter", "react", "devops",
+    "data scientist", "data engineer", "machine learning engineer",
+    "mechanical", "electrical", "civil", "structural", "quantity surveyor",
+    "food", "kitchen", "chef", "barista", "crew", "cashier",
+    "security guard", "security officer", "physical security",
+    "marketing", "sales", "business development", "bd",
+    "hr", "human resource", "recruitment", "talent acquisition",
+    "credit", "loan", "mortgage", "insurance", "actuarial",
+    "driver", "despatch", "cleaner", "housekeeping",
+    "japanese", "mandarin", "korean", "arabic",
+    "internship", "intern",
 ]
 
 # Jobs from these companies get a ⭐ priority flag in the Telegram message.
 # Add any new company here — no code change needed anywhere else.
 TARGET_COMPANIES = [
+    # Central bank / regulators
     "bank negara malaysia", "bnm",
-    "slb", "schlumberger",
-    "bank islam",
-    "ambank", "ambank group",
-    "public bank",
-    "cimb", "cimb group",
-    "rhb", "rhb bank",
-    "huawei",
-    "accenture",
-    "paynet",
-    "khazanah",
-    "maxis",
-    "pnb", "permodalan nasional berhad",
+
+    # Commercial banks
     "maybank", "malayan banking",
-    "tng digital" , "tng",
-    "ryt bank" , "gxbank",
-    "mbsb", "mbsb bank berhad"
+    "cimb", "cimb group",
+    "public bank",
+    "rhb", "rhb bank",
+    "ambank", "ambank group",
+    "hong leong bank", "hong leong",
+    "alliance bank",
+    "hsbc malaysia", "hsbc",
+    "standard chartered",
+    "affin bank",
+    "mbsb", "mbsb bank berhad",
+    "kenanga",
+
+    # Islamic banks
+    "bank islam",
+
+    # Digital banks
+    "tng digital", "tng",
+    "gxbank",
+    "ryt bank",
+    "bigpay",
+    "boost",
+
+    # Payment infra
+    "paynet",
+    "setel",
+
+    # GLCs / investment
+    "khazanah",
+    "pnb", "permodalan nasional berhad",
+
+    # Telcos
+    "maxis",
+    "celcomdigi", "celcom",
+    "telekom malaysia", "tm",
+    "time dotcom", "time",
+    "u mobile",
+
+    # Network / security vendors
+    "cisco",
+    "huawei",
+    "fortinet",
+    "palo alto networks", "palo alto",
+    "juniper networks", "juniper",
+    "f5 networks",
+
+    # Cloud / big tech (aspirational)
+    "microsoft",
+    "google",
+    "amazon", "aws",
+    "dell technologies", "dell",
+    "hpe", "hewlett packard enterprise",
+    "amd",
+
+    # System integrators / MSPs
+    "accenture",
+    "bridgenet solutions sdn bhd", "bridgenet",
+    "ntt malaysia", "ntt",
+    "dimension data",
+    "dxc technology", "dxc",
+    "ibm malaysia", "ibm",
+    "avanade",
+
+    # Government cybersecurity agencies
+    "cybersecurity malaysia",
+    "nacsa",
+    "mdec",
+    "mcmc",
+
+    # Data centers
+    "aims data centre", "aims",
+
+    # Fintech / ride-hailing infra
+    "grabpay", "grab",
+    "slb", "schlumberger",
+
+    # Automotive (low priority)
+    "mercedes-benz malaysia",
 ]
 
 # JobStreet salary filter:
