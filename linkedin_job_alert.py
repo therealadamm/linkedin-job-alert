@@ -35,10 +35,6 @@ KEYWORDS = [
     "Infrastructure Engineer",
     "IT Infrastructure",
     "Network Infrastructure",
-    "Systems Engineer",
-    "Platform Engineer",
-    "Field Engineer",
-    "Transmission Engineer",
     "IP Engineer",
     "Pre-Sales Engineer",         # common at Huawei, Cisco partners
     "ICT Engineer",
