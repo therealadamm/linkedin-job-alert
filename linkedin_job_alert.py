@@ -35,7 +35,6 @@ KEYWORDS = [
     "Infrastructure Engineer",
     "IT Infrastructure",
     "Network Infrastructure",
-    "IP Engineer",
     "Pre-Sales Engineer",         # common at Huawei, Cisco partners
     "ICT Engineer",
     "ICT Officer",
@@ -57,8 +56,7 @@ KEYWORDS = [
     "Fresh Graduate",
     "Graduate Trainee",
     "Graduate Programme",
-    "Management Trainee",
-    "Associate Engineer",
+    "Management Trainee"
 ]
 # LinkedIn uses a single centre-point + radius.
 # JobStreet searches KL and Selangor separately and merges results.
@@ -89,7 +87,7 @@ EXCLUDE_TITLE_KEYWORDS = [
     "credit", "loan", "mortgage", "insurance", "actuarial",
     "driver", "despatch", "cleaner", "housekeeping",
     "japanese", "mandarin", "korean", "arabic",
-    "internship", "intern",
+    "internship", "intern", "QC", "QA", "Procurement"
 ]
 
 # Jobs from these companies get a ⭐ priority flag in the Telegram message.
