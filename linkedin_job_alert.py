@@ -87,7 +87,9 @@ EXCLUDE_TITLE_KEYWORDS = [
     "credit", "loan", "mortgage", "insurance", "actuarial",
     "driver", "despatch", "cleaner", "housekeeping",
     "japanese", "mandarin", "korean", "arabic",
-    "internship", "intern", "QC", "QA", "Procurement"
+    "internship", "intern", "QC", "QA", "Procurement", "data analyst",
+    "backup", "cloud", "quality", 
+    
 ]
 
 # Jobs from these companies get a ⭐ priority flag in the Telegram message.
