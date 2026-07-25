@@ -88,7 +88,8 @@ EXCLUDE_TITLE_KEYWORDS = [
     "driver", "despatch", "cleaner", "housekeeping",
     "japanese", "mandarin", "korean", "arabic",
     "internship", "intern", "QC", "QA", "Procurement", "data analyst",
-    "backup", "cloud", "quality", 
+    "backup", "cloud", "quality", "Maintenance", "Cleanroom", 
+    "Transaction", "Market,Affairs", "Medical"
     
 ]
 
