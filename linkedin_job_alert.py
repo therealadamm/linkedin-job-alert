@@ -89,7 +89,9 @@ EXCLUDE_TITLE_KEYWORDS = [
     "japanese", "mandarin", "korean", "arabic",
     "internship", "intern", "QC", "QA", "Procurement", "data analyst",
     "backup", "cloud", "quality", "Maintenance", "Cleanroom", 
-    "Transaction", "Market,Affairs", "Medical"
+    "Transaction", "Market,Affairs", "Medical", "procurement",
+    "travel", "customer", "test process", "inventory", "qa", 
+    "developer", "content", "logistics", "equipment", "qs" 
     
 ]
 
