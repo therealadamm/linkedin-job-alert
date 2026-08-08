@@ -35,13 +35,13 @@ KEYWORDS = [
     "Infrastructure Engineer",
     "IT Infrastructure",
     "Network Infrastructure",
-    "Pre-Sales Engineer",         # common at Huawei, Cisco partners
+    "Pre-Sales Engineer",
 
     # Data center adjacent
     "Data Center Engineer",
     "DC Operations",
 
-    # Security (your existing ones, kept)
+    # Security
     "Cybersecurity",
     "Cyber Security",
     "SOC Analyst",
@@ -54,29 +54,32 @@ KEYWORDS = [
     "Fresh Graduate",
     "Graduate Trainee",
     "Graduate Programme",
-    "Management Trainee"
+    "Management Trainee",
+    "Associate Engineer",
 ]
-# LinkedIn uses a single centre-point + radius.
-# JobStreet searches KL and Selangor separately and merges results.
-# Location strategy:
-# KL/Selangor  — all keywords, primary market
-# Johor        — DC/infra keywords only, data center boom
-# Penang       — target companies only, manufacturing IT
-LINKEDIN_LOCATION = "Kuala Lumpur, Malaysia"
-DISTANCE_MILES = 25  # covers full Klang Valley
 
+# LinkedIn — single centre-point + radius (25 miles ~ 40km covers full Klang Valley)
+LINKEDIN_LOCATION = "Kuala Lumpur, Malaysia"
+DISTANCE_MILES = 25
+
+# JobStreet — per-location configs with keyword scoping
+# KL/Selangor : all keywords
+# Johor Bahru : DC/infra keywords only (data center boom)
+# Penang      : target companies only (manufacturing IT, selective)
 JOBSTREET_LOCATION_CONFIGS = [
     {
         "location": "Kuala Lumpur",
-        "keywords": "all",   # use full KEYWORDS list
+        "keywords": "all",
+        "companies_only": False,
     },
     {
         "location": "Selangor",
         "keywords": "all",
+        "companies_only": False,
     },
     {
         "location": "Johor Bahru",
-        "keywords": [        # DC/infra roles only — where the data center boom is
+        "keywords": [
             "Data Center Engineer",
             "DC Operations",
             "Network Operations",
@@ -85,30 +88,32 @@ JOBSTREET_LOCATION_CONFIGS = [
             "NOC Engineer",
             "IT Infrastructure",
         ],
+        "companies_only": False,
     },
     {
         "location": "Penang",
-        "keywords": [        # Only roles at your specific target companies
+        "keywords": [
             "Network Engineer",
             "IT Infrastructure",
             "Systems Engineer",
             "ICT Engineer",
         ],
-        "companies_only": True,   # filter flag — only post if it's a target company
+        "companies_only": True,  # only post if it's a target company
     },
 ]
-TIME_WINDOW_SECONDS = 3 * 60 * 60  # 3 hours look-back per run
+
+# How far back each run looks — kept wider than run interval to avoid edge misses
+TIME_WINDOW_SECONDS = 3 * 60 * 60  # 3 hours
 
 RESULTS_PER_KEYWORD = 25
 
 # Titles containing any of these are silently skipped (case-insensitive)
 EXCLUDE_TITLE_KEYWORDS = [
-    # Seniority — you're not ready for these
+    # Seniority
     "senior", "sr.", "lead", "principal", "head of", "director",
     "manager", "supervisor", "vp", "vice president",
     "5+ years", "7+ years", "10+ years",
-
-    # Wrong domains entirely
+    # Wrong domains
     "software", "frontend", "backend", "fullstack", "full stack",
     "mobile", "android", "ios", "flutter", "react", "devops",
     "data scientist", "data engineer", "machine learning engineer",
@@ -120,20 +125,18 @@ EXCLUDE_TITLE_KEYWORDS = [
     "credit", "loan", "mortgage", "insurance", "actuarial",
     "driver", "despatch", "cleaner", "housekeeping",
     "japanese", "mandarin", "korean", "arabic",
-    "internship", "intern", "QC", "QA", "Procurement", "data analyst",
-    "backup", "cloud", "quality", "Maintenance", "Cleanroom", 
-    "Transaction", "Market,Affairs", "Medical", "procurement",
-    "travel", "customer", "test process", "inventory", "qa", 
-    "developer", "content", "logistics", "equipment", "qs" 
-    
+    "internship", "intern",
+    "qc", "qa", "procurement", "data analyst",
+    "backup", "cloud", "quality", "maintenance", "cleanroom",
+    "transaction", "medical",
+    "travel", "customer", "test process", "inventory",
+    "developer", "content", "logistics", "equipment", "qs",
 ]
 
-# Jobs from these companies get a ⭐ priority flag in the Telegram message.
-# Add any new company here — no code change needed anywhere else.
+# Jobs from these companies get a ⭐ PRIORITY flag in the Telegram message
 TARGET_COMPANIES = [
     # Central bank / regulators
     "bank negara malaysia", "bnm",
-
     # Commercial banks
     "maybank", "malayan banking",
     "cimb", "cimb group",
@@ -147,32 +150,26 @@ TARGET_COMPANIES = [
     "affin bank",
     "mbsb", "mbsb bank berhad",
     "kenanga",
-
     # Islamic banks
     "bank islam",
-
     # Digital banks
     "tng digital", "tng",
     "gxbank",
     "ryt bank",
     "bigpay",
     "boost",
-
     # Payment infra
     "paynet",
     "setel",
-
     # GLCs / investment
     "khazanah",
     "pnb", "permodalan nasional berhad",
-
     # Telcos
     "maxis",
     "celcomdigi", "celcom",
     "telekom malaysia", "tm",
     "time dotcom", "time",
     "u mobile",
-
     # Network / security vendors
     "cisco",
     "huawei",
@@ -180,15 +177,13 @@ TARGET_COMPANIES = [
     "palo alto networks", "palo alto",
     "juniper networks", "juniper",
     "f5 networks",
-
-    # Cloud / big tech (aspirational)
+    # Cloud / big tech
     "microsoft",
     "google",
     "amazon", "aws",
     "dell technologies", "dell",
     "hpe", "hewlett packard enterprise",
     "amd",
-
     # System integrators / MSPs
     "accenture",
     "bridgenet solutions sdn bhd", "bridgenet",
@@ -197,38 +192,36 @@ TARGET_COMPANIES = [
     "dxc technology", "dxc",
     "ibm malaysia", "ibm",
     "avanade",
-
     # Government cybersecurity agencies
     "cybersecurity malaysia",
     "nacsa",
     "mdec",
     "mcmc",
-
     # Data centers
     "aims data centre", "aims",
-
-    # Fintech / ride-hailing infra
+    # Fintech
     "grabpay", "grab",
     "slb", "schlumberger",
-
     # Automotive (low priority)
     "mercedes-benz malaysia",
+    # Sandisk / Western Digital (Penang)
+    "sandisk", "western digital",
 ]
 
-# JobStreet salary filter:
-#   - salary shown AND below this -> skip
-#   - no salary shown             -> post (you decide)
+# Salary filter: skip only if salary is SHOWN and below threshold
+# No salary shown -> always post, you decide
 MIN_SALARY_MYR = 3500
 
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+        "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
     ),
     "Accept-Language": "en-US,en;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
-# -----------------------------------------------------------------
+# ------------------------------------------------------------------
 
 
 def load_seen():
@@ -242,6 +235,7 @@ def load_seen():
 
 
 def save_seen(seen_ids):
+    # Cap at 1000 to prevent file bloating over time
     trimmed = list(seen_ids)[-1000:]
     with open(SEEN_FILE, "w") as f:
         json.dump({"seen_ids": trimmed}, f, indent=2)
@@ -249,9 +243,9 @@ def save_seen(seen_ids):
 
 def parse_salary_myr(salary_text):
     """
-    Try to extract the lower-bound monthly salary from a freeform string.
-    Returns an int (MYR/month) or None if unparseable.
-    Examples handled:
+    Extract lower-bound monthly salary from freeform text.
+    Returns int (MYR/month) or None if unparseable.
+    Handles:
         "MYR 3,000 - MYR 5,000 per month"  -> 3000
         "RM3500/month"                       -> 3500
         "MYR 42,000 per year"               -> 3500
@@ -263,13 +257,12 @@ def parse_salary_myr(salary_text):
     if not numbers:
         return None
     lower = numbers[0]
-    # Rough annual-to-monthly conversion
     if "YEAR" in text or "ANNUAL" in text or lower > 50000:
         lower = lower // 12
     return lower
 
 
-# ----------------------------------------------------------------- LinkedIn
+# ------------------------------------------------------------------ LinkedIn
 
 def fetch_jobs_linkedin(keyword):
     url = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
@@ -314,6 +307,7 @@ def fetch_jobs_linkedin(keyword):
                 "posted": posted_tag.get_text(strip=True) if posted_tag else "recently",
                 "matched_keyword": keyword,
                 "source": "LinkedIn",
+                "companies_only": False,
             })
         except AttributeError:
             continue
@@ -321,23 +315,27 @@ def fetch_jobs_linkedin(keyword):
     return jobs
 
 
-# ----------------------------------------------------------------- JobStreet
+# ------------------------------------------------------------------ JobStreet
 
 def fetch_jobs_jobstreet(keyword):
     """
-    Scrape JobStreet Malaysia public search results.
-    Tries Next.js embedded JSON first, then falls back to HTML card parsing.
-    Searches KL and Selangor separately and merges.
+    Scrapes JobStreet per JOBSTREET_LOCATION_CONFIGS.
+    Each config defines which keywords apply and whether to restrict
+    to target companies only (e.g. Penang).
     """
     all_jobs = []
     seen_in_call = set()
 
-    for loc in JOBSTREET_LOCATIONS:
-        params = {
-            "q": keyword,
-            "l": loc,
-            "daterange": "3",
-        }
+    for config in JOBSTREET_LOCATION_CONFIGS:
+        loc = config["location"]
+        allowed_keywords = config.get("keywords", "all")
+        companies_only = config.get("companies_only", False)
+
+        # Skip this location if the current keyword isn't in its allowed list
+        if allowed_keywords != "all" and keyword not in allowed_keywords:
+            continue
+
+        params = {"q": keyword, "l": loc, "daterange": "3"}
         try:
             resp = requests.get(
                 "https://www.jobstreet.com.my/jobs",
@@ -354,28 +352,24 @@ def fetch_jobs_jobstreet(keyword):
         soup = BeautifulSoup(resp.text, "html.parser")
         parsed = False
 
-        # --- Attempt 1: Next.js __NEXT_DATA__ JSON ---
+        # Attempt 1: Next.js __NEXT_DATA__ JSON (cleanest, most reliable)
         next_tag = soup.find("script", id="__NEXT_DATA__")
         if next_tag:
             try:
                 data = json.loads(next_tag.string)
                 page_props = data.get("props", {}).get("pageProps", {})
-
-                # Try several known paths the JSON might use
                 jobs_raw = (
                     page_props.get("jobDetails")
                     or page_props.get("initialData", {}).get("jobs")
                     or page_props.get("searchResult", {}).get("jobs")
                     or []
                 )
-
                 for j in jobs_raw:
                     try:
                         raw_id = j.get("id") or j.get("jobId") or ""
                         job_id = f"js_{raw_id}"
                         if not raw_id or job_id in seen_in_call:
                             continue
-
                         advertiser = j.get("advertiser") or {}
                         salary_text = (
                             j.get("salary")
@@ -394,6 +388,7 @@ def fetch_jobs_jobstreet(keyword):
                             "posted": j.get("listingDate") or "recently",
                             "matched_keyword": keyword,
                             "source": "JobStreet",
+                            "companies_only": companies_only,
                         })
                         parsed = True
                     except (KeyError, TypeError):
@@ -401,7 +396,7 @@ def fetch_jobs_jobstreet(keyword):
             except (json.JSONDecodeError, AttributeError):
                 pass
 
-        # --- Attempt 2: HTML card fallback ---
+        # Attempt 2: HTML card fallback
         if not parsed:
             for card in soup.select("article[data-job-id], div[data-job-id]"):
                 try:
@@ -409,13 +404,11 @@ def fetch_jobs_jobstreet(keyword):
                     job_id = f"js_{raw_id}"
                     if not raw_id or job_id in seen_in_call:
                         continue
-
                     title_el = card.select_one("h1,h2,h3,[data-automation='jobTitle']")
                     company_el = card.select_one("[data-automation='jobCompany']")
                     loc_el = card.select_one("[data-automation='jobLocation']")
                     salary_el = card.select_one("[data-automation='jobSalary']")
                     link_el = card.select_one("a[href*='/job/']")
-
                     seen_in_call.add(job_id)
                     all_jobs.append({
                         "id": job_id,
@@ -427,6 +420,7 @@ def fetch_jobs_jobstreet(keyword):
                         "posted": "recently",
                         "matched_keyword": keyword,
                         "source": "JobStreet",
+                        "companies_only": companies_only,
                     })
                 except (AttributeError, KeyError):
                     continue
@@ -436,27 +430,32 @@ def fetch_jobs_jobstreet(keyword):
     return all_jobs
 
 
-# ----------------------------------------------------------------- Filters
+# ------------------------------------------------------------------ Filters
 
-def is_relevant(job, companies_only=False):
+def is_relevant(job):
     title = job["title"].lower()
     loc = job["location"].lower()
+    companies_only = job.get("companies_only", False)
 
+    # Exclude seniority / wrong domain keywords from title
     if any(kw in title for kw in EXCLUDE_TITLE_KEYWORDS):
         return False
 
+    # Physical roles only
     if "remote" in loc:
         return False
 
+    # Malaysia only
     if any(c in loc for c in ["singapore", "indonesia", "thailand", "philippines"]):
         return False
 
-    # Penang: only post if it's one of your target companies
+    # Penang: only post if it's a target company
     if companies_only:
         company_lower = job.get("company", "").lower()
         if not any(tc in company_lower for tc in TARGET_COMPANIES):
             return False
 
+    # Salary filter: only skip if salary is explicitly shown AND below threshold
     salary_text = job.get("salary_text", "")
     if salary_text:
         lower_bound = parse_salary_myr(salary_text)
@@ -466,23 +465,23 @@ def is_relevant(job, companies_only=False):
     return True
 
 
-# ----------------------------------------------------------------- Telegram
+# ------------------------------------------------------------------ Telegram
 
 def send_telegram(job):
     source = job.get("source", "LinkedIn")
     icon = "\U0001F535" if source == "LinkedIn" else "\U0001F7E1"  # 🔵 🟡
 
-    # Priority flag if company matches your target list
+    # Priority flag if company is in your target list
     company_lower = job.get("company", "").lower()
     is_priority = any(tc in company_lower for tc in TARGET_COMPANIES)
     priority_tag = "\u2B50 <b>PRIORITY COMPANY</b>\n" if is_priority else ""
 
     salary_line = ""
     if job.get("salary_text"):
-        salary_line = f"\U0001F4B0 {html.escape(job['salary_text'])}\n"
+        salary_line = f"\U0001F4B0 {html.escape(str(job['salary_text']))}\n"
 
     text = (
-        f"{priority_tag}{icon} <b>[{source}]</b>  \U0001F195 <b>{html.escape(job['title'])}</b>\n"
+        f"{priority_tag}"
         f"{icon} <b>[{source}]</b>  \U0001F195 <b>{html.escape(job['title'])}</b>\n"
         f"\U0001F3E2 {html.escape(job['company'])}\n"
         f"\U0001F4CD {html.escape(job['location'])}\n"
@@ -509,28 +508,30 @@ def send_telegram(job):
 def send_test_message():
     send_telegram({
         "title": "Setup check \u2705",
-        "company": "Job Alert Bot",
+        "company": "Maybank",
         "location": "Kuala Lumpur, Malaysia",
         "salary_text": "MYR 4,000 - MYR 6,000",
         "posted": "just now",
         "matched_keyword": "this is a test — not a real job",
         "link": "https://www.linkedin.com/jobs/",
         "source": "LinkedIn",
+        "companies_only": False,
     })
     send_telegram({
         "title": "Setup check \u2705",
-        "company": "Job Alert Bot",
+        "company": "Unknown Co",
         "location": "Selangor, Malaysia",
         "salary_text": "",
         "posted": "just now",
         "matched_keyword": "this is a test — not a real job",
         "link": "https://www.jobstreet.com.my/jobs",
         "source": "JobStreet",
+        "companies_only": False,
     })
-    print("Two test messages sent (one LinkedIn, one JobStreet). Check Telegram.")
+    print("Two test messages sent (LinkedIn priority + JobStreet non-priority). Check Telegram.")
 
 
-# ----------------------------------------------------------------- Main
+# ------------------------------------------------------------------ Main
 
 def main():
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
