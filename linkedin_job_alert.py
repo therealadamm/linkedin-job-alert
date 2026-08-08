@@ -438,7 +438,6 @@ def fetch_jobs_jobstreet(keyword):
 
 # ----------------------------------------------------------------- Filters
 
-def is_relevant(job):
 def is_relevant(job, companies_only=False):
     title = job["title"].lower()
     loc = job["location"].lower()
