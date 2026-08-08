@@ -36,8 +36,6 @@ KEYWORDS = [
     "IT Infrastructure",
     "Network Infrastructure",
     "Pre-Sales Engineer",         # common at Huawei, Cisco partners
-    "ICT Engineer",
-    "ICT Officer",
 
     # Data center adjacent
     "Data Center Engineer",
@@ -60,10 +58,45 @@ KEYWORDS = [
 ]
 # LinkedIn uses a single centre-point + radius.
 # JobStreet searches KL and Selangor separately and merges results.
+# Location strategy:
+# KL/Selangor  — all keywords, primary market
+# Johor        — DC/infra keywords only, data center boom
+# Penang       — target companies only, manufacturing IT
 LINKEDIN_LOCATION = "Kuala Lumpur, Malaysia"
-JOBSTREET_LOCATIONS = ["Kuala Lumpur", "Selangor"]
-DISTANCE_MILES = 25  # ~40km, closest LinkedIn option to your 50km ask
+DISTANCE_MILES = 25  # covers full Klang Valley
 
+JOBSTREET_LOCATION_CONFIGS = [
+    {
+        "location": "Kuala Lumpur",
+        "keywords": "all",   # use full KEYWORDS list
+    },
+    {
+        "location": "Selangor",
+        "keywords": "all",
+    },
+    {
+        "location": "Johor Bahru",
+        "keywords": [        # DC/infra roles only — where the data center boom is
+            "Data Center Engineer",
+            "DC Operations",
+            "Network Operations",
+            "Network Engineer",
+            "Infrastructure Engineer",
+            "NOC Engineer",
+            "IT Infrastructure",
+        ],
+    },
+    {
+        "location": "Penang",
+        "keywords": [        # Only roles at your specific target companies
+            "Network Engineer",
+            "IT Infrastructure",
+            "Systems Engineer",
+            "ICT Engineer",
+        ],
+        "companies_only": True,   # filter flag — only post if it's a target company
+    },
+]
 TIME_WINDOW_SECONDS = 3 * 60 * 60  # 3 hours look-back per run
 
 RESULTS_PER_KEYWORD = 25
@@ -406,22 +439,25 @@ def fetch_jobs_jobstreet(keyword):
 # ----------------------------------------------------------------- Filters
 
 def is_relevant(job):
+def is_relevant(job, companies_only=False):
     title = job["title"].lower()
     loc = job["location"].lower()
 
-    # Exclude seniority/experience keywords from title
     if any(kw in title for kw in EXCLUDE_TITLE_KEYWORDS):
         return False
 
-    # Physical roles only
     if "remote" in loc:
         return False
 
-    # Malaysia only
     if any(c in loc for c in ["singapore", "indonesia", "thailand", "philippines"]):
         return False
 
-    # JobStreet salary filter: skip ONLY if salary explicitly shown AND below threshold
+    # Penang: only post if it's one of your target companies
+    if companies_only:
+        company_lower = job.get("company", "").lower()
+        if not any(tc in company_lower for tc in TARGET_COMPANIES):
+            return False
+
     salary_text = job.get("salary_text", "")
     if salary_text:
         lower_bound = parse_salary_myr(salary_text)
