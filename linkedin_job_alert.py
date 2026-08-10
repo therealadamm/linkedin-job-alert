@@ -131,6 +131,8 @@ EXCLUDE_TITLE_KEYWORDS = [
     "transaction", "medical",
     "travel", "customer", "test process", "inventory",
     "developer", "content", "logistics", "equipment", "qs",
+    "chemical","solar", "pest","clerk", "assembler", "bartender",
+    "hospitality", "controls"
 ]
 
 # Jobs from these companies get a ⭐ PRIORITY flag in the Telegram message
